@@ -22,7 +22,9 @@ class Classifier:
         """
         model = Classifier()
         """
-        self.nsfw_model = onnxruntime.InferenceSession('models/classifier_model.onnx')
+        dirname = os.path.dirname(__file__)
+        model_path = os.path.join(dirname, "models/classifier_model.onnx")
+        self.nsfw_model = onnxruntime.InferenceSession(model_path)
 
     def classify_video(
         self,
