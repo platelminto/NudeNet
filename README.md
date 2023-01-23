@@ -19,8 +19,8 @@ Uncensored version of the following image can be found at https://i.imgur.com/rg
 **Classifier classes:**
 |class name   |  Description    |
 |--------|:--------------:
-|safe | Image/Video is not sexually explicit     |
-|unsafe | Image/Video is sexually explicit|
+|safe | Image is not sexually explicit     |
+|unsafe | Image is sexually explicit|
 
 
 # As self-hostable API service
