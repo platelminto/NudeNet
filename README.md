@@ -10,7 +10,7 @@
   and will not be treated as constant value/weight. etc.` warning.
 - It only works on images.
 - The classifier is included in the project itself.
-- Only the v2 model is available (this was the default from the original repo).
+- Only the v2 model is available (this was the default from the original repo). So `v2` from original is `main` here.
 
 Uncensored version of the following image can be found at https://i.imgur.com/rga6845.jpg (NSFW)
 
