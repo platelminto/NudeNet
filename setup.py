@@ -12,11 +12,11 @@ from shutil import rmtree
 from setuptools import find_packages, setup, Command
 
 # Package meta-data.
-NAME = 'NudeNet'
-DESCRIPTION = 'An ensemble of Neural Nets for Nudity Detection and Censoring'
-URL = 'https://github.com/bedapudi6788/NudeNet'
-EMAIL = 'praneethbedapudi@gmail.com'
-AUTHOR = 'BEDAPUDI PRANEETH'
+NAME = 'NudeNetClassifier'
+DESCRIPTION = 'A Neural Net for Nudity Detection. Classifier only.'
+URL = 'https://github.com/platelminto/NudeNetClassifier'
+EMAIL = 'gmomigliano@protonmail.com'
+AUTHOR = 'Giorgio Momigliano'
 REQUIRES_PYTHON = '>=3.6.0'
 VERSION = '2.1'
 
@@ -24,7 +24,6 @@ VERSION = '2.1'
 REQUIRED = [
     'pillow',
     'opencv-python-headless>=4.5.1.48',
-    'pydload',
     'scikit-image',
     'onnxruntime',
 ]
