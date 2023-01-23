@@ -90,4 +90,4 @@ if __name__ == "__main__":
         )
         images = input().split("||")
         images = [image.strip() for image in images]
-        print(m.predict(images), "\n")
+        print(m.classify(images), "\n")

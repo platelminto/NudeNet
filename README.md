@@ -6,8 +6,11 @@
 ## Fork differences:
 
 - Only the default classifier is available.
+- The classifier no longer throws the `Initializer block1_conv1_bn/keras_learning_phase:0 appears in graph inputs 
+  and will not be treated as constant value/weight. etc.` warning.
 - It only works on images.
 - The classifier is included in the project itself.
+- Only the v2 model is available (this was the default from the original repo).
 
 Uncensored version of the following image can be found at https://i.imgur.com/rga6845.jpg (NSFW)
 
@@ -62,7 +65,7 @@ classifier.classify(['path_to_image_1', 'path_to_image_2'], batch_size=BATCH_SIZ
 ```
 
 # Notes:
-- V1 of NudeDetector (available in master branch of this repo) was trained on 12000 images labelled by the good folks at cti-community.
-- V2 (current version) of NudeDetector is trained on 160,000 entirely auto-labelled (using classification heat maps and various other hybrid techniques) images. 
+- The current version of NudeDetector is trained on 160,000 entirely auto-labelled (using classification heat maps and 
+  various other hybrid techniques) images. 
 - The entire data for the classifier is available at https://archive.org/details/NudeNet_classifier_dataset_v1
 - A part of the auto-labelled data (Images are from the classifier dataset above) used to train the base Detector is available at https://github.com/notAI-tech/NudeNet/releases/download/v0/DETECTOR_AUTO_GENERATED_DATA.zip
