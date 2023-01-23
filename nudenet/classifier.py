@@ -1,13 +1,9 @@
 import os
-import cv2
-import tarfile
-import pydload
-import logging
+
 import numpy as np
 import onnxruntime
-from .video_utils import get_interest_frames_from_video
+
 from .image_utils import load_images
-from PIL import Image as pil_image
 
 
 class Classifier:
@@ -25,64 +21,6 @@ class Classifier:
         dirname = os.path.dirname(__file__)
         model_path = os.path.join(dirname, "models/classifier_model.onnx")
         self.nsfw_model = onnxruntime.InferenceSession(model_path)
-
-    def classify_video(
-        self,
-        video_path,
-        batch_size=4,
-        image_size=(256, 256),
-        categories=["unsafe", "safe"],
-    ):
-        frame_indices = None
-        frame_indices, frames, fps, video_length = get_interest_frames_from_video(
-            video_path
-        )
-        logging.debug(
-            f"VIDEO_PATH: {video_path}, FPS: {fps}, Important frame indices: {frame_indices}, Video length: {video_length}"
-        )
-
-        frames, frame_names = load_images(frames, image_size, image_names=frame_indices)
-
-        if not frame_names:
-            return {}
-
-        preds = []
-        model_preds = []
-        while len(frames):
-            _model_preds = self.nsfw_model.run(
-                [self.nsfw_model.get_outputs()[0].name],
-                {self.nsfw_model.get_inputs()[0].name: frames[:batch_size]},
-            )[0]
-            model_preds.append(_model_preds)
-            preds += np.argsort(_model_preds, axis=1).tolist()
-            frames = frames[batch_size:]
-
-        probs = []
-        for i, single_preds in enumerate(preds):
-            single_probs = []
-            for j, pred in enumerate(single_preds):
-                single_probs.append(
-                    model_preds[int(i / batch_size)][int(i % batch_size)][pred]
-                )
-                preds[i][j] = categories[pred]
-
-            probs.append(single_probs)
-
-        return_preds = {
-            "metadata": {
-                "fps": fps,
-                "video_length": video_length,
-                "video_path": video_path,
-            },
-            "preds": {},
-        }
-
-        for i, frame_name in enumerate(frame_names):
-            return_preds["preds"][frame_name] = {}
-            for _ in range(len(preds[i])):
-                return_preds["preds"][frame_name][preds[i][_]] = probs[i][_]
-
-        return return_preds
 
     def classify(
         self,
